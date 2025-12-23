@@ -18,8 +18,8 @@ class AlphabetState extends State<Alphabet> {
     await _audioPlayer.play(AssetSource(audioPath));
   }
 
-  void _showPopup(BuildContext context, String letter, String imagePath,
-      String label, String audioPath) {
+  void _showPopup(BuildContext context, String letter, String letterImagePath,
+      String letterBodyImagePath, String label, String audioPath) {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
@@ -48,7 +48,7 @@ class AlphabetState extends State<Alphabet> {
                 Row(
                   children: [
                     Image.asset(
-                      imagePath,
+                      letterImagePath,
                       width: 50,
                       height: 50,
                     ),
@@ -60,7 +60,7 @@ class AlphabetState extends State<Alphabet> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child: Image.asset(
-                      imagePath,
+                      letterBodyImagePath,
                       width: 150,
                       height: 150,
                       fit: BoxFit.cover,
@@ -170,7 +170,7 @@ class AlphabetState extends State<Alphabet> {
                           child: GridView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 9,
                               mainAxisSpacing: 15,
                               crossAxisSpacing: 15,
@@ -179,21 +179,23 @@ class AlphabetState extends State<Alphabet> {
                             itemCount: 26,
                             itemBuilder: (context, index) {
                               final letter = String.fromCharCode(65 + index);
-                              final imagePath =
-                              AppConstants.letterImages[index];
+                              final letterImagePath =
+                                  AppConstants.letterImages[index];
+                              final letterBodyImagePath =
+                                  AppConstants.letterBodyImages[index];
                               final label = AppConstants.letterLabels[index];
                               final audioPath =
-                              AppConstants.letterVoices[index];
+                                  AppConstants.letterVoices[index];
 
                               return GestureDetector(
                                 onTap: () {
-                                  _showPopup(context, letter, imagePath, label,
-                                      audioPath);
+                                  _showPopup(context, letter, letterImagePath,
+                                      letterBodyImagePath, label, audioPath);
                                 },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(12.0),
                                   child: Image.asset(
-                                    imagePath,
+                                    letterImagePath,
                                     fit: BoxFit.cover,
                                   ),
                                 ),

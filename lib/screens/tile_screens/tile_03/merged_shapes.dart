@@ -25,7 +25,7 @@ class _MergedShapesState extends State<MergedShapes> {
           // Background image
           Positioned.fill(
             child: Image.asset(
-              AppConstants.backgroundImage, // Use constant for image path
+              AppConstants.backgroundImage,
               fit: BoxFit.cover,
             ),
           ),
@@ -37,7 +37,7 @@ class _MergedShapesState extends State<MergedShapes> {
                 // Top bar with icons
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 8.0), // Adjust padding here
+                      horizontal: 16.0, vertical: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

@@ -74,6 +74,8 @@ flutter:
     - assets/images/dictionary/
     - assets/images/hidden_object/level_1/
     - assets/images/splash/
+    - assets/images/alphabet/letter/
+    - assets/images/alphabet/letterBody/
     - assets/audio/
     - assets/audio/alphabet/
     - assets/audio/dictionary/vehicles/
