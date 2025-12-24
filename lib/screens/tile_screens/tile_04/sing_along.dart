@@ -2,9 +2,24 @@ import 'package:Granny/screens/common/video_player.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/app_constants.dart';
 import '../../main_menu.dart';
+import '../../../data/song_data.dart';
+import '../../../models/song_model.dart';
 
-class SingAlong extends StatelessWidget {
+class SingAlong extends StatefulWidget {
   const SingAlong({super.key});
+
+  @override
+  State<SingAlong> createState() => _SingAlongState();
+}
+
+class _SingAlongState extends State<SingAlong> {
+  late List<Song> songs;
+
+  @override
+  void initState() {
+    super.initState();
+    songs = getSongs();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +80,6 @@ class SingAlong extends StatelessWidget {
                           width: 500,
                           height: 250,
                           child: GridView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 4,
@@ -73,10 +87,10 @@ class SingAlong extends StatelessWidget {
                               crossAxisSpacing: 25,
                               childAspectRatio: 1,
                             ),
-                            itemCount: 8,
+                            itemCount: songs.length,
                             itemBuilder: (context, index) {
 
-                              String videoUrl = AppConstants.songKaraokeList[index];
+                              final song = songs[index];
 
                               return GestureDetector(
                                 onTap: () {
@@ -85,47 +99,9 @@ class SingAlong extends StatelessWidget {
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             VideoPlayerScreen(
-                                              videoUrl: videoUrl,
+                                              videoUrl: song.videoPath,
                                             )),
                                   );
-                                  // Handle different actions based on index
-                                  // switch (index) {
-                                  //   case 0:
-                                  //     Navigator.push(
-                                  //       context,
-                                  //       MaterialPageRoute(
-                                  //           builder: (context) =>
-                                  //           VideoPlayerScreen(
-                                  //             videoUrl: videoUrl,
-                                  //           )),
-                                  //     );
-                                  //     break;
-                                  //     break;
-                                  //   case 1:
-                                  //     // To be Implement
-                                  //     break;
-                                  //   case 2:
-                                  //     // To be Implement
-                                  //     break;
-                                  //   case 3:
-                                  //     // To be Implement
-                                  //     break;
-                                  //   case 4:
-                                  //     // To be Implement
-                                  //     break;
-                                  //   case 5:
-                                  //   // To be Implement
-                                  //     break;
-                                  // // Add more cases as needed for other items
-                                  //   default:
-                                  //     ScaffoldMessenger.of(context)
-                                  //         .showSnackBar(
-                                  //       SnackBar(
-                                  //         content: Text(
-                                  //             'You clicked on item ${index + 1}'),
-                                  //       ),
-                                  //     );
-                                  // }
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -144,9 +120,30 @@ class SingAlong extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius:
                                     BorderRadius.circular(12.0),
-                                    child: Image.asset(
-                                      AppConstants.songAlbumArt[index],
-                                      fit: BoxFit.cover,
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        // Placeholder or Album Art
+                                        Image.asset(
+                                          'assets/images/songs/song_1.png', // Default placeholder
+                                          fit: BoxFit.cover,
+                                        ),
+                                        // Title overlay
+                                        Container(
+                                          color: Colors.black38,
+                                          alignment: Alignment.center,
+                                          padding: const EdgeInsets.all(4),
+                                          child: Text(
+                                            song.title,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),

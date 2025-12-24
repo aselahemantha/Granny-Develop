@@ -83,6 +83,29 @@ flutter:
     - assets/audio/alphabet/
     - assets/audio/dictionary/vehicles/
     - assets/video/sing_along/
+    - assets/images/story_telling/story01/
+    - assets/images/story_telling/story02/
+    - assets/images/story_telling/story03/
+    - assets/images/story_telling/story04/
+    - assets/images/story_telling/story05/
+    - assets/images/story_telling/story06/
+    - assets/images/story_telling/story07/
+    - assets/images/story_telling/story08/
+    - assets/images/story_telling/story09/
+    - assets/images/story_telling/story10/
+    - assets/images/story_telling/story11/
+    - assets/images/story_telling/story12/
+    - assets/images/story_telling/story13/
+    - assets/images/story_telling/story14/
+    - assets/images/story_telling/story15/
+    - assets/images/story_telling/story16/
+    - assets/images/story_telling/story17/
+    - assets/images/story_telling/story18/
+    - assets/images/story_telling/story19/
+    - assets/images/story_telling/story20/
+    - assets/images/story_telling/story21/
+    - assets/images/story_telling/story22/
+    - assets/images/story_telling/story23/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
