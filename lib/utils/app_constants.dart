@@ -43,6 +43,33 @@ class AppConstants {
     "The race began! The rabbit sprinted ahead, leaving the turtle far behind. Feeling overconfident, the rabbit decided to rest under a tree.",
   ];
 
+  // Story 01 - Amma’s Avurudu Surprise
+
+  static const String story1CoverImage = 'assets/images/story_telling/story01/story01_cover.png';
+  static const String backgroundMusicStory1 = 'audio/background_story_telling.mp3';
+
+  static const List<String> story1Images = [
+    'assets/images/story_telling/story01/story01_scene01.png',
+    'assets/images/story_telling/story01/story01_scene02.png',
+    'assets/images/story_telling/story01/story01_scene03.png',
+    'assets/images/story_telling/story01/story01_scene04.png',
+    'assets/images/story_telling/story01/story01_scene05.png',
+    'assets/images/story_telling/story01/story01_scene06.png',
+    'assets/images/story_telling/story01/story01_scene07.png',
+  ];
+
+  static const List<String> story1Voices = [
+    'audio/background_story_telling.mp3',
+    'audio/background_story_telling.mp3',
+    'audio/background_story_telling.mp3',
+  ];
+
+  static const List<String> story1Texts = [
+    "Once upon a time, in a faraway forest, there lived a turtle and a rabbit. The turtle was slow but wise, and the rabbit was fast but careless.",
+    "One day, the rabbit challenged the turtle to a race. The turtle accepted, knowing he had a plan.",
+    "The race began! The rabbit sprinted ahead, leaving the turtle far behind. Feeling overconfident, the rabbit decided to rest under a tree.",
+  ];
+
   // Alphabetic
 
   static const String alphabetBackground = 'assets/images/background/alphabet_bg.png';

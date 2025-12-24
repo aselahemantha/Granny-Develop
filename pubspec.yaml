@@ -76,6 +76,9 @@ flutter:
     - assets/images/splash/
     - assets/images/alphabet/letter/
     - assets/images/alphabet/letterBody/
+    - assets/images/story_telling/story01/
+    - assets/images/story_telling/story02/
+    - assets/images/story_telling/story03/
     - assets/audio/
     - assets/audio/alphabet/
     - assets/audio/dictionary/vehicles/

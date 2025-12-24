@@ -4,6 +4,7 @@ import '../utils/app_constants.dart';
 import '../providers/music_provider.dart';
 import 'tile_screens/tile_08/setting.dart';
 import 'tile_screens/tile_01/story_telling.dart';
+import 'tile_screens/tile_01/thumbnail_selection_screen.dart';
 import 'tile_screens/tile_02/alphabet.dart';
 import 'tile_screens/tile_03/shape_color_menu.dart';
 import 'tile_screens/tile_04/sing_along.dart';
@@ -73,7 +74,7 @@ class MainMenu extends StatelessWidget {
                               switch (index) {
                                 case 0:
                                   musicProvider.toggleMusic(false);
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MyLandscapeScreen()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ThumbnailSelectionScreen()));
                                   break;
                                 case 1:
                                   musicProvider.toggleMusic(false);

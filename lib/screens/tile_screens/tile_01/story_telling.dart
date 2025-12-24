@@ -2,10 +2,12 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/app_constants.dart';
 import '../../main_menu.dart';
-import '../../../utils/enum/story_enum.dart';
+import '../../../models/story_model.dart';
 
 class MyLandscapeScreen extends StatefulWidget {
-  const MyLandscapeScreen({super.key});
+  final Story story;
+
+  const MyLandscapeScreen({super.key, required this.story});
 
   @override
   MyLandscapeScreenState createState() => MyLandscapeScreenState();
@@ -16,6 +18,8 @@ class MyLandscapeScreenState extends State<MyLandscapeScreen> {
   int currentPageIndex = 0;
   bool stopMusic = false;
 
+  List<StoryPage> get _pages => widget.story.pages;
+
   @override
   void initState() {
     super.initState();
@@ -23,9 +27,12 @@ class MyLandscapeScreenState extends State<MyLandscapeScreen> {
   }
 
   Future<void> _playMusicWithDelay() async {
-    await Future.delayed(const Duration(seconds: 5));
-    if (!stopMusic) {
-      await _audioPlayer.play(AssetSource(StoryEnum.values[currentPageIndex].backgroundVoice));
+    await Future.delayed(const Duration(seconds: 1)); // Reduced delay for better UX
+    if (!stopMusic && mounted) {
+      final audioPath = _pages[currentPageIndex].audioPath;
+      if (audioPath != null) {
+        await _audioPlayer.play(AssetSource(audioPath));
+      }
     }
   }
 
@@ -44,7 +51,7 @@ class MyLandscapeScreenState extends State<MyLandscapeScreen> {
   void _changePage(int change) {
     int newPageIndex = currentPageIndex + change;
 
-    if (newPageIndex >= 0 && newPageIndex < StoryEnum.values.length) {
+    if (newPageIndex >= 0 && newPageIndex < _pages.length) {
       setState(() {
         currentPageIndex = newPageIndex;
       });
@@ -62,16 +69,17 @@ class MyLandscapeScreenState extends State<MyLandscapeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    StoryEnum currentStory = StoryEnum.values[currentPageIndex];
+    StoryPage currentPage = _pages[currentPageIndex];
 
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              currentStory.backgroundImage,
-              fit: BoxFit.cover,
+              currentPage.imagePath,
+              fit: BoxFit.contain,
             ),
           ),
 
@@ -97,11 +105,9 @@ class MyLandscapeScreenState extends State<MyLandscapeScreen> {
             top: 25,
             right: 25,
             child: IconButton(
-              icon: const Icon(Icons.menu,
+              icon: Icon(stopMusic ? Icons.volume_off : Icons.volume_up,
                   size: 30, color: Colors.white),
-              onPressed: () {
-                // Handle menu pressed
-              },
+              onPressed: _toggleMusic,
             ),
           ),
 
@@ -118,7 +124,7 @@ class MyLandscapeScreenState extends State<MyLandscapeScreen> {
               ),
               alignment: Alignment.center,
               child: Text(
-                "${currentPageIndex + 1}/${StoryEnum.values.length}",
+                "${currentPageIndex + 1}/${_pages.length}",
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 17,
@@ -160,17 +166,19 @@ class MyLandscapeScreenState extends State<MyLandscapeScreen> {
                 // Center Story Text
                 Expanded(
                   child: Container(
-                    height: 60,
-                    color: Colors.white,
+                    height: 80, // Increased height for better text fit
+                    color: Colors.white.withOpacity(0.9),
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      currentStory.text,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                    child: SingleChildScrollView(
+                      child: Text(
+                        currentPage.text,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),
@@ -179,7 +187,7 @@ class MyLandscapeScreenState extends State<MyLandscapeScreen> {
                 // Right Button
                 IconButton(
                   icon: const Icon(Icons.arrow_right, size: 80, color: Colors.white),
-                  onPressed: currentPageIndex < StoryEnum.values.length - 1 ? () => _changePage(1) : null,
+                  onPressed: currentPageIndex < _pages.length - 1 ? () => _changePage(1) : null,
                 ),
               ],
             ),
